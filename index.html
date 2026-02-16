@@ -217,34 +217,69 @@
             cursor: pointer;
         }
 
-        /* Checkbox group for programs */
+        /* Checkbox group for programs — collapsible accordion */
         .program-section { margin-top: 10px; }
         .program-category {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: #1a4d2e;
-            margin: 14px 0 8px;
+            margin: 0;
+            padding: 12px 14px;
+            background: #f0f7f2;
+            border: 1px solid #d4e6da;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+            transition: background 0.2s;
+            margin-bottom: 6px;
+        }
+        .program-category:hover { background: #e2f0e6; }
+        .program-category::after {
+            content: '▸';
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+        .program-category.open::after {
+            transform: rotate(90deg);
+        }
+        .program-category .cat-selected {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: #666;
+            margin-left: 8px;
         }
         .checkbox-grid {
-            display: grid;
+            display: none;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 8px;
+            gap: 4px;
+            padding: 8px 10px;
+            margin-bottom: 10px;
+            border: 1px solid #e8e8e0;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            background: #fafff8;
+        }
+        .checkbox-grid.open {
+            display: grid;
         }
         .checkbox-grid label {
             display: flex;
             align-items: center;
             gap: 8px;
             font-weight: 400;
-            font-size: 0.92rem;
+            font-size: 0.88rem;
             color: #333;
             cursor: pointer;
-            padding: 6px 10px;
-            border-radius: 5px;
+            padding: 5px 8px;
+            border-radius: 4px;
             transition: background 0.2s;
         }
-        .checkbox-grid label:hover { background: #f0f7f2; }
+        .checkbox-grid label:hover { background: #e2f0e6; }
         .checkbox-grid input[type="checkbox"] {
-            width: 17px; height: 17px;
+            width: 16px; height: 16px;
             accent-color: #1a4d2e;
             cursor: pointer;
         }
@@ -492,31 +527,31 @@
 
                 <div class="program-section" id="programSection">
 
-                    <div class="program-category">FSC / ICOM / ICS / FA</div>
+                    <div class="program-category" onclick="toggleProgram(this)"><span>FSC / ICOM / ICS / FA <span class="cat-selected"></span></span></div>
                     <div class="checkbox-grid">
-                        <label><input type="checkbox" name="Programs" value="FSc Pre-Medical"> FSc Pre-Medical</label>
-                        <label><input type="checkbox" name="Programs" value="FSc Pre-Engineering"> FSc Pre-Engineering</label>
-                        <label><input type="checkbox" name="Programs" value="ICom"> ICom</label>
-                        <label><input type="checkbox" name="Programs" value="ICS"> ICS</label>
-                        <label><input type="checkbox" name="Programs" value="FA IT"> FA IT</label>
-                        <label><input type="checkbox" name="Programs" value="FA Shariya"> FA Shariya</label>
-                        <label><input type="checkbox" name="Programs" value="FA General"> FA General</label>
+                        <label><input type="checkbox" name="Programs" value="FSc Pre-Medical" onchange="updateCount(this)"> FSc Pre-Medical</label>
+                        <label><input type="checkbox" name="Programs" value="FSc Pre-Engineering" onchange="updateCount(this)"> FSc Pre-Engineering</label>
+                        <label><input type="checkbox" name="Programs" value="ICom" onchange="updateCount(this)"> ICom</label>
+                        <label><input type="checkbox" name="Programs" value="ICS" onchange="updateCount(this)"> ICS</label>
+                        <label><input type="checkbox" name="Programs" value="FA IT" onchange="updateCount(this)"> FA IT</label>
+                        <label><input type="checkbox" name="Programs" value="FA Shariya" onchange="updateCount(this)"> FA Shariya</label>
+                        <label><input type="checkbox" name="Programs" value="FA General" onchange="updateCount(this)"> FA General</label>
                     </div>
 
-                    <div class="program-category">Medical / Technical Programs</div>
+                    <div class="program-category" onclick="toggleProgram(this)"><span>Medical / Technical Programs <span class="cat-selected"></span></span></div>
                     <div class="checkbox-grid">
-                        <label><input type="checkbox" name="Programs" value="LHV"> LHV (Lady Health Visitor)</label>
-                        <label><input type="checkbox" name="Programs" value="B Pharmacy"> B Pharmacy</label>
-                        <label><input type="checkbox" name="Programs" value="OTT"> OTT (Operation Theater Tech)</label>
-                        <label><input type="checkbox" name="Programs" value="Dispenser"> Dispenser</label>
-                        <label><input type="checkbox" name="Programs" value="CNA"> CNA (Certified Nursing Asst)</label>
-                        <label><input type="checkbox" name="Programs" value="Radiologist"> Radiologist</label>
-                        <label><input type="checkbox" name="Programs" value="Dialysis Technician"> Dialysis Technician</label>
-                        <label><input type="checkbox" name="Programs" value="MLT"> MLT (Medical Lab Tech)</label>
-                        <label><input type="checkbox" name="Programs" value="DPT"> DPT (Doctor of Physical Therapy)</label>
-                        <label><input type="checkbox" name="Programs" value="CMW"> CMW (Community Midwife)</label>
-                        <label><input type="checkbox" name="Programs" value="Ultrasound Technician"> Ultrasound Technician</label>
-                        <label><input type="checkbox" name="Programs" value="Anesthesia Technician"> Anesthesia Technician</label>
+                        <label><input type="checkbox" name="Programs" value="LHV" onchange="updateCount(this)"> LHV (Lady Health Visitor)</label>
+                        <label><input type="checkbox" name="Programs" value="B Pharmacy" onchange="updateCount(this)"> B Pharmacy</label>
+                        <label><input type="checkbox" name="Programs" value="OTT" onchange="updateCount(this)"> OTT (Operation Theater Tech)</label>
+                        <label><input type="checkbox" name="Programs" value="Dispenser" onchange="updateCount(this)"> Dispenser</label>
+                        <label><input type="checkbox" name="Programs" value="CNA" onchange="updateCount(this)"> CNA (Certified Nursing Asst)</label>
+                        <label><input type="checkbox" name="Programs" value="Radiologist" onchange="updateCount(this)"> Radiologist</label>
+                        <label><input type="checkbox" name="Programs" value="Dialysis Technician" onchange="updateCount(this)"> Dialysis Technician</label>
+                        <label><input type="checkbox" name="Programs" value="MLT" onchange="updateCount(this)"> MLT (Medical Lab Tech)</label>
+                        <label><input type="checkbox" name="Programs" value="DPT" onchange="updateCount(this)"> DPT (Doctor of Physical Therapy)</label>
+                        <label><input type="checkbox" name="Programs" value="CMW" onchange="updateCount(this)"> CMW (Community Midwife)</label>
+                        <label><input type="checkbox" name="Programs" value="Ultrasound Technician" onchange="updateCount(this)"> Ultrasound Technician</label>
+                        <label><input type="checkbox" name="Programs" value="Anesthesia Technician" onchange="updateCount(this)"> Anesthesia Technician</label>
                     </div>
 
                 </div>
@@ -538,6 +573,27 @@
     </div>
 
     <script>
+        // ── Program accordion toggle ──
+        function toggleProgram(el) {
+            el.classList.toggle('open');
+            const grid = el.nextElementSibling;
+            grid.classList.toggle('open');
+            if (el.classList.contains('open')) {
+                el.style.borderRadius = '6px 6px 0 0';
+                el.style.marginBottom = '0';
+            } else {
+                el.style.borderRadius = '6px';
+                el.style.marginBottom = '6px';
+            }
+        }
+        function updateCount(cb) {
+            const grid = cb.closest('.checkbox-grid');
+            const cat = grid.previousElementSibling;
+            const count = grid.querySelectorAll('input:checked').length;
+            const badge = cat.querySelector('.cat-selected');
+            badge.textContent = count > 0 ? '(' + count + ' selected)' : '';
+        }
+
         // ── CNIC auto-format: xxxxx-xxxxxxx-x ──
         const cnicInput = document.getElementById('cnic');
         cnicInput.addEventListener('input', function(e) {
